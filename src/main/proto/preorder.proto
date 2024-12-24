@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package preorder;
+
+service PreorderService {
+  rpc GetProductDetails (ProductRequest) returns (ProductDetailsResponse);
+  rpc ListAvailableProducts (google.protobuf.Empty) returns (ProductListResponse);
+  rpc GetProductAvailability (ProductRequest) returns (AvailabilityResponse);
+}
+
+message ProductRequest {
+  string productId = 1;
+}
+
+message ProductDetailsResponse {
+  string productId = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  bool available = 5;
+}
+
+message ProductListResponse {
+  repeated Product products = 1;
+}
+
+message Product {
+  string productId = 1;
+  string name = 2;
+  double price = 3;
+}
+
+message AvailabilityResponse {
+  string productId = 1;
+  bool available = 2;
+}
